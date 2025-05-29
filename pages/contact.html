@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - AI责任框架研究</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="../index.html" class="text-xl font-bold text-gray-900">AI责任框架研究</a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="../index.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">首页</a>
+                    <a href="background.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">研究背景</a>
+                    <a href="analysis.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">问题分析</a>
+                    <a href="solution_framework.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">解决方案框架</a>
+                    <a href="case_studies.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">案例研究</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors inline-flex items-center">
+                            行动指南
+                            <svg class="w-4 h-4 ml-1 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-md py-1 w-48 z-10">
+                            <a href="guidelines_policymakers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">政策制定者</a>
+                            <a href="guidelines_developers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">开发者/企业</a>
+                            <a href="guidelines_research.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">研究机构</a>
+                            <a href="guidelines_public.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">公众用户</a>
+                        </div>
+                    </div>
+                    <a href="interactive_resources.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">互动与资源</a>
+                    <a href="team.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">研究团队</a>
+                    <a href="contact.html" class="text-blue-600 font-semibold px-3 py-2 rounded-md text-sm">联系我们</a>
+                </div>
+                 <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <a href="../index.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">首页</a>
+                <a href="background.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">研究背景</a>
+                <a href="analysis.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">问题分析</a>
+                <a href="solution_framework.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">解决方案框架</a>
+                <a href="case_studies.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">案例研究</a>
+                <a href="guidelines_policymakers.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 政策制定者</a>
+                <a href="guidelines_developers.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 开发者/企业</a>
+                <a href="guidelines_research.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 研究机构</a>
+                <a href="guidelines_public.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 公众用户</a>
+                <a href="interactive_resources.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">互动与资源</a>
+                <a href="team.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">研究团队</a>
+                <a href="contact.html" class="text-blue-600 font-semibold block px-3 py-2 rounded-md text-base">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-500 to-cyan-600 text-white py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">联系我们</h1>
+            <p class="text-xl opacity-90">
+                我们欢迎各种形式的垂询、合作与反馈。
+            </p>
+        </div>
+    </section>
+
+    <main class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow-xl rounded-xl p-8 md:p-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">与 AI伦理研究小组 取得联系</h2>
+
+            <p class="text-gray-700 mb-8 leading-relaxed text-center">
+                感谢您对“人工智能系统决策责任归属与追责框架”研究项目的关注。如果您对我们的研究成果有疑问，希望参与讨论，或者寻求潜在的合作机会（包括学术交流、政策建议、行业合作、媒体采访或案例分享），请通过以下方式与我们联系。我们期待您的来信，并会尽力在3-5个工作日内回复。
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6 mr-2 text-blue-600">
+                            <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                            <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        一般垂询与信息请求
+                    </h3>
+                    <p class="text-gray-600 text-sm">对于项目的总体介绍、研究进展、公开信息或媒体请求，请联系：</p>
+                    <a href="mailto:info.ai.ethics.project@example.com" class="mt-2 inline-block text-blue-600 hover:text-blue-800 font-medium break-all">
+                        info.ai.ethics.project@example.com
+                    </a>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6 mr-2 text-teal-600">
+                          <path fill-rule="evenodd" d="M15.28 9.47a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 11-1.06-1.06L13.69 10 9.97 6.28a.75.75 0 011.06-1.06l4.25 4.25zM6.03 5.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 11-1.06-1.06L8.69 10 4.97 6.28a.75.75 0 010-1.06z" clip-rule="evenodd" />
+                        </svg>
+                        研究与合作机会
+                    </h3>
+                    <p class="text-gray-600 text-sm">如果您代表学术机构、研究组织或企业，希望探讨合作研究、技术验证或框架应用，请联系：</p>
+                     <a href="mailto:research.ai.ethics.project@example.com" class="mt-2 inline-block text-blue-600 hover:text-blue-800 font-medium break-all">
+                        research.ai.ethics.project@example.com
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mb-12 bg-gray-50 p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-gray-700 mb-3 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6 mr-2 text-purple-600">
+                      <path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.145l.005-.002.007-.004.012-.007a7.499 7.499 0 00.258-.171l.005-.003.006-.004.011-.007c.06-.044.119-.09.176-.137l.004-.003.005-.004.009-.006.01-.007.011-.007c.881-.642 1.642-1.446 2.234-2.328a10.023 10.023 0 001.966-4.193C15.699 10.307 16 9.175 16 8c0-3.314-2.686-6-6-6S4 4.686 4 8c0 1.175.301 2.307.803 3.285a10.022 10.022 0 001.966 4.193c.592.882 1.353 1.686 2.234 2.328l.011.007.01.007.009.006.005.004.004.003c.057.047.116.093.176.137l.012.007.007.004.005.003a7.5 7.5 0 00.258.171l.012.007.007.004.005.002a5.742 5.742 0 00.28.145l.019.008.006.003zM10 11.25a3.25 3.25 0 100-6.5 3.25 3.25 0 000 6.5z" clip-rule="evenodd" />
+                    </svg>
+                    办公地址 (占位符)
+                </h3>
+                <p class="text-gray-600">AI伦理研究小组<br>创新科技大道 123号, 研究大楼 A座<br>智慧城市示范区，邮编: 100000<br>中华人民共和国</p>
+                <p class="text-xs text-gray-500 mt-2">(实际地址请以官方公告为准，当前仅为示例)</p>
+            </div>
+
+            <form action="#" method="POST" class="space-y-6">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">姓名 <span class="text-red-500">*</span></label>
+                    <input type="text" name="name" id="name" autocomplete="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="请输入您的姓名">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">电子邮箱 <span class="text-red-500">*</span></label>
+                    <input type="email" name="email" id="email" autocomplete="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="you@example.com">
+                </div>
+                 <div>
+                    <label for="organization" class="block text-sm font-medium text-gray-700">所属机构 (可选)</label>
+                    <input type="text" name="organization" id="organization" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="您所在的机构名称">
+                </div>
+                 <div>
+                    <label for="subject" class="block text-sm font-medium text-gray-700">主题 <span class="text-red-500">*</span></label>
+                    <input type="text" name="subject" id="subject" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="邮件主题">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700">留言内容 <span class="text-red-500">*</span></label>
+                    <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="请在此处输入您的留言..."></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                        发送留言
+                    </button>
+                </div>
+                 <p class="text-xs text-gray-500 text-center mt-4">注：此联系表单为静态演示，信息不会被实际发送。您的隐私对我们很重要，如需真实联系，请使用上述邮箱地址。</p>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <h3 class="text-lg font-semibold mb-4">AI责任框架研究</h3>
+                    <p class="text-gray-400 mb-4">
+                        致力于构建清晰、公正、可执行的人工智能系统决策责任归属与追责框架。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        © 2024 AI责任框架研究项目. 保留所有权利.
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">快速导航</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white">首页</a></li>
+                        <li><a href="background.html" class="hover:text-white">研究背景</a></li>
+                        <li><a href="analysis.html" class="hover:text-white">问题分析</a></li>
+                        <li><a href="solution_framework.html" class="hover:text-white">解决方案框架</a></li>
+                         <li><a href="case_studies.html" class="hover:text-white">案例研究</a></li>
+                        <li><a href="guidelines_policymakers.html" class="hover:text-white">指南: 政策制定者</a></li>
+                        <li><a href="guidelines_developers.html" class="hover:text-white">指南: 开发者/企业</a></li>
+                        <li><a href="guidelines_research.html" class="hover:text-white">指南: 研究机构</a></li>
+                        <li><a href="guidelines_public.html" class="hover:text-white">指南: 公众用户</a></li>
+                        <li><a href="interactive_resources.html" class="hover:text-white">互动与资源</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="team.html" class="hover:text-white">研究团队</a></li>
+                         <li><a href="#" class="hover:text-white">学术合作</a></li>
+                        <li><a href="#" class="hover:text-white">政策建议</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解决方案框架 - AI责任框架研究</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .framework-section {
+            @apply mb-12;
+        }
+        .framework-title {
+            @apply text-2xl font-bold text-gray-800 mb-4;
+        }
+        .framework-subtitle {
+             @apply text-xl font-semibold text-indigo-700 mb-3;
+        }
+        .framework-list {
+            @apply list-disc list-inside space-y-2 text-gray-700 leading-relaxed;
+        }
+        .diagram-container {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+        .diagram-container img, .diagram-container svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .tab-button {
+            @apply px-6 py-3 font-medium text-sm leading-5 rounded-t-lg;
+        }
+        .tab-button.active {
+            @apply bg-indigo-600 text-white;
+        }
+        .tab-button:not(.active) {
+            @apply text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700;
+        }
+        .tab-content {
+            @apply p-6 bg-white rounded-b-lg rounded-r-lg shadow-md;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="../index.html" class="text-xl font-bold text-gray-900">AI责任框架研究</a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="../index.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">首页</a>
+                    <a href="background.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">研究背景</a>
+                    <a href="analysis.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">问题分析</a>
+                    <a href="solution_framework.html" class="text-blue-600 font-semibold px-3 py-2 rounded-md text-sm">解决方案框架</a>
+                    <a href="case_studies.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">案例研究</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors inline-flex items-center">
+                            行动指南
+                            <svg class="w-4 h-4 ml-1 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-md py-1 w-48 z-10">
+                            <a href="guidelines_policymakers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">政策制定者</a>
+                            <a href="guidelines_developers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">开发者/企业</a>
+                            <a href="guidelines_research.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">研究机构</a>
+                            <a href="guidelines_public.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">公众用户</a>
+                        </div>
+                    </div>
+                    <a href="interactive_resources.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">互动与资源</a>
+                    <a href="team.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">研究团队</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">联系我们</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <a href="../index.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">首页</a>
+                <a href="background.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">研究背景</a>
+                <a href="analysis.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">问题分析</a>
+                <a href="solution_framework.html" class="text-blue-600 font-semibold block px-3 py-2 rounded-md text-base">解决方案框架</a>
+                <a href="case_studies.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">案例研究</a>
+                <a href="guidelines_policymakers.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 政策制定者</a>
+                <a href="guidelines_developers.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 开发者/企业</a>
+                <a href="guidelines_research.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 研究机构</a>
+                <a href="guidelines_public.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 公众用户</a>
+                <a href="interactive_resources.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">互动与资源</a>
+                <a href="team.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">研究团队</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-indigo-700 to-purple-800 text-white py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">AI责任归属与追责解决方案框架</h1>
+            <p class="text-xl opacity-90">
+                一个多层次、多支柱、协同治理的综合框架，旨在应对AI系统决策带来的责任挑战。
+            </p>
+        </div>
+    </section>
+
+    <main class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow-xl rounded-xl p-8 md:p-12">
+            
+            <div class="framework-section text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">框架核心理念</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    本框架旨在通过建立清晰的伦理原则、风险管理机制、责任分配体系、技术支撑和法律政策协同，系统性地解决AI决策责任归属问题，促进AI技术的负责任创新与应用。
+                </p>
+            </div>
+
+            <div class="diagram-container mb-16">
+                <h3 class="text-xl font-semibold mb-4 text-center text-gray-800">图表 3.1: AI系统决策责任归属与追责框架流程图</h3>
+                 <img src="https://r2.flowith.net/files/o/1748502352658-AI_System_Decision_Responsibility_and_Accountability_Framework_Flowchart_index_0@1024x1024.png" alt="AI System Decision Responsibility and Accountability Framework Flowchart">
+                <p class="text-xs text-center text-gray-500 mt-4">此图表宏观展示了AI责任归属与追责框架的主要构成和相互关系。</p>
+            </div>
+            
+            <!-- Tabs for Framework Pillars -->
+            <div class="mb-8">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-2 sm:space-x-4 overflow-x-auto" aria-label="Tabs" id="framework-tabs">
+                        <button class="tab-button active" data-tab="principles">伦理原则</button>
+                        <button class="tab-button" data-tab="risk">风险管理</button>
+                        <button class="tab-button" data-tab="responsibility">责任体系</button>
+                        <button class="tab-button" data-tab="governance">治理机制</button>
+                        <button class="tab-button" data-tab="technical">技术支撑</button>
+                        <button class="tab-button" data-tab="legal">法律政策</button>
+                    </nav>
+                </div>
+            </div>
+
+            <div id="tab-content-container">
+                <!-- Tab Content: Ethical Principles -->
+                <div id="principles-content" class="tab-content">
+                    <h3 class="framework-subtitle">一、核心伦理原则体系</h3>
+                    <p class="text-gray-700 mb-4">确立AI开发和应用必须遵循的根本性伦理准则，作为责任判断的价值基石。</p>
+                    <ul class="framework-list">
+                        <li><strong>以人为本 (Human-centricity):</strong> AI系统的设计、开发和部署应以促进人类福祉、尊重人类尊严和权利为首要目标。</li>
+                        <li><strong>公平公正与非歧视 (Fairness, Justice, and Non-Discrimination):</strong> AI系统应避免产生或加剧不公平的偏见和歧视，努力实现机会和结果的实质公平。</li>
+                        <li><strong>可控可信 (Controllability and Trustworthiness):</strong> AI系统在其整个生命周期中应保持可控，其行为应可预测、可靠，并能赢得用户和社会的信任。</li>
+                        <li><strong>透明度与可解释性 (Transparency and Explainability):</strong> AI系统的决策过程和数据使用应尽可能透明，对于关键决策，应提供合理的解释。</li>
+                        <li><strong>问责与责任 (Accountability and Responsibility):</strong> 对于AI系统造成的损害或不当决策，必须能够明确责任主体并追究其责任。</li>
+                        <li><strong>安全与保障 (Safety and Security):</strong> AI系统应在其整个生命周期内保持安全，能够抵御恶意攻击和滥用，保障个人和社会安全。</li>
+                        <li><strong>隐私保护 (Privacy Protection):</strong> AI系统在数据收集、处理和使用过程中应严格遵守隐私保护原则和法规，尊重个人隐私权。</li>
+                        <li><strong>可持续性与社会福祉 (Sustainability and Societal Well-being):</strong> AI的发展应促进社会的可持续发展，并增进整体社会福祉。</li>
+                    </ul>
+                    <div class="diagram-container mt-6">
+                        <h4 class="text-lg font-semibold mb-2 text-center text-gray-700">图表 3.2: AI系统决策责任归属与追责核心伦理原则体系</h4>
+                         <img src="https://via.placeholder.com/600x400.png?text=图表+3.2:+核心伦理原则体系+(SVG占位)" alt="AI系统决策责任归属与追责核心伦理原则体系" class="max-w-md"> <!-- Placeholder for SVG Fig 2 -->
+                        <p class="text-xs text-center text-gray-500 mt-2">该图展示了指导AI责任框架的核心伦理原则及其相互关系。</p>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Risk Management -->
+                <div id="risk-content" class="tab-content hidden">
+                    <h3 class="framework-subtitle">二、风险分级与管理机制</h3>
+                    <p class="text-gray-700 mb-4">根据AI应用的潜在风险水平，实施差异化的管理策略和合规要求。</p>
+                    <ul class="framework-list">
+                        <li><strong>风险识别与评估：</strong>建立标准化的AI风险评估方法论，从技术、伦理、法律、社会等多个维度识别潜在风险。</li>
+                        <li><strong>风险分级：</strong>
+                            <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                <li><strong>不可接受风险 (Unacceptable Risk):</strong> 如操纵人类行为造成伤害、社会评分系统等，原则上应禁止。</li>
+                                <li><strong>高风险 (High Risk):</strong> 如自动驾驶、医疗诊断、关键基础设施管理、司法信贷等领域的AI应用，需遵守严格的强制性要求（如事前合格性评定、严格的测试验证、人类监督、数据质量和透明度要求）。</li>
+                                <li><strong>有限风险 (Limited Risk):</strong> 如聊天机器人等与人直接交互的AI，需履行特定的透明度义务（告知用户正在与AI互动）。</li>
+                                <li><strong>低/最小风险 (Low/Minimal Risk):</strong> 如垃圾邮件过滤器、AI游戏等，可依赖自愿性行为准则和一般性产品安全法规。</li>
+                            </ul>
+                        </li>
+                        <li><strong>风险缓解与控制：</strong>针对不同风险等级，要求采取相应的技术和组织措施进行风险预防、控制和缓解。</li>
+                        <li><strong>持续监测与更新：</strong>AI风险并非一成不变，需建立对已部署AI系统的持续风险监测、评估和管理更新机制。</li>
+                    </ul>
+                     <div class="diagram-container mt-6">
+                        <h4 class="text-lg font-semibold mb-2 text-center text-gray-700">图表 3.3: AI伦理项目风险等级与监管强度图</h4>
+                        <img src="https://r2.flowith.net/files/o/1748502357991-AI_Ethics_Project_Risk_Levels_and_Regulatory_Intensity_Chart_index_3@1024x1024.png" alt="AI伦理项目风险等级与监管强度图">
+                        <p class="text-xs text-center text-gray-500 mt-2">此图表说明不同风险等级的AI应用对应不同的监管强度，是风险管理的核心。</p>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Responsibility System -->
+                <div id="responsibility-content" class="tab-content hidden">
+                    <h3 class="framework-subtitle">三、多主体责任矩阵体系</h3>
+                    <p class="text-gray-700 mb-4">明确AI系统生命周期中各参与方（设计者、开发者、部署者、运营者、使用者等）的权利、义务和责任边界。</p>
+                    <ul class="framework-list">
+                        <li><strong>开发者/提供商责任：</strong>对AI系统的设计安全、算法公平性、数据质量、模型鲁棒性、可解释性以及充分的风险告知和用户说明承担主要责任。</li>
+                        <li><strong>部署者/运营者责任：</strong>对AI系统的选择、集成、实际应用场景的风险评估、持续性能监控、用户培训、数据安全保障以及合规运营承担责任。</li>
+                        <li><strong>使用者责任：</strong>在授权范围内、按照说明和规范合理使用AI系统，并对自身输入和基于AI输出做出的最终决策负责。</li>
+                        <li><strong>监管者责任：</strong>制定和执行AI相关的法律法规和标准，监督市场行为，保护公众利益，处理争议和投诉。</li>
+                        <li><strong>第三方机构责任：</strong>如认证机构、测试机构、审计机构，对其提供的服务质量和专业判断负责。</li>
+                        <li><strong>责任链条协同：</strong>强调各主体间的协同和信息共享，确保责任链条的完整性和可追溯性。</li>
+                    </ul>
+                     <div class="diagram-container mt-6">
+                        <h4 class="text-lg font-semibold mb-2 text-center text-gray-700">图表 3.4: AI工程伦理相关方责任映射图</h4>
+                        <img src="https://r2.flowith.net/files/o/1748502442848-AI_Engineering_Ethics_Stakeholders_Responsibility_Mapping_index_4@1024x1024.png" alt="AI工程伦理相关方责任映射图">
+                        <p class="text-xs text-center text-gray-500 mt-2">此图表旨在清晰展示AI生命周期中不同利益相关者的责任范围。</p>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Governance Mechanisms -->
+                <div id="governance-content" class="tab-content hidden">
+                    <h3 class="framework-subtitle">四、全周期治理与协同机制</h3>
+                    <p class="text-gray-700 mb-4">建立覆盖AI系统从概念到退役全生命周期的治理流程和多方协同治理模式。</p>
+                    <ul class="framework-list">
+                        <li><strong>事前预防 (Ex-ante Governance):</strong> 包括伦理设计、影响评估、算法审计、数据合规性审查、标准化测试与认证。</li>
+                        <li><strong>事中监测 (In-process Governance):</strong> 对运行中的AI系统进行持续性能监控、安全审计、偏见漂移检测、用户反馈收集。</li>
+                        <li><strong>事后补救 (Ex-post Governance):</strong> 建立清晰的损害报告机制、责任调查程序、争议解决渠道（调解、仲裁、诉讼）和赔偿机制。</li>
+                        <li><strong>多方协同治理 (Multi-stakeholder Collaboration):</strong> 鼓励政府、行业协会、企业、学术界、技术社区、公民社会组织和公众之间的对话、合作与信息共享，共同参与AI治理标准的制定和实施。</li>
+                        <li><strong>适应性治理 (Adaptive Governance):</strong> AI治理框架应具备灵活性和适应性，能够根据技术发展、新的风险认知和社会反馈进行动态调整和完善。</li>
+                    </ul>
+                     <div class="diagram-container mt-6">
+                        <h4 class="text-lg font-semibold mb-2 text-center text-gray-700">图表 3.5: AI系统生命周期风险治理流程图</h4>
+                        <img src="https://r2.flowith.net/files/o/1748502383472-AI_System_Lifecycle_Risk_Governance_Flowchart_index_5@1024x1024.png" alt="AI系统生命周期风险治理流程图">
+                        <p class="text-xs text-center text-gray-500 mt-2">该流程图展示了AI系统从设计到部署运营各阶段的风险治理环节。</p>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Technical Support -->
+                <div id="technical-content" class="tab-content hidden">
+                    <h3 class="framework-subtitle">五、技术支撑体系</h3>
+                    <p class="text-gray-700 mb-4">发展和应用先进技术手段，为AI责任的实现提供技术保障。</p>
+                    <ul class="framework-list">
+                        <li><strong>可解释AI (XAI) 技术：</strong>开发和推广能够解释AI模型决策逻辑和依据的技术，提高透明度，辅助责任认定。</li>
+                        <li><strong>偏见检测与缓解技术：</strong>研究和应用能够识别、量化和减轻训练数据和算法模型中偏见的技术。</li>
+                        <li><strong>隐私增强技术 (PETs)：</strong>如差分隐私、联邦学习、同态加密等，在数据使用过程中保护个人隐私。</li>
+                        <li><strong>审计追踪与日志记录技术：</strong>确保AI系统的关键操作和决策过程可被记录、存储和审计，为事后追责提供证据。</li>
+                        <li><strong>安全可信技术：</strong>包括AI模型的鲁棒性测试、对抗性攻击防御、数据安全保障等技术，提升系统整体的可靠性和安全性。</li>
+                        <li><strong>标准化与认证技术：</strong>开发AI系统和算法的测试、评估和认证技术标准，为合规性评估提供依据。</li>
+                    </ul>
+                </div>
+
+                <!-- Tab Content: Legal and Policy Framework -->
+                <div id="legal-content" class="tab-content hidden">
+                    <h3 class="framework-subtitle">六、法律政策衔接与完善</h3>
+                    <p class="text-gray-700 mb-4">推动现有法律体系的适应性调整和新法律规范的制定，为AI责任追究提供法律依据和保障。</p>
+                    <ul class="framework-list">
+                        <li><strong>完善现有法律框架：</strong>评估并修订《民法典》（侵权责任编）、《产品质量法》、《消费者权益保护法》、《网络安全法》、《数据安全法》、《个人信息保护法》等相关法律，使其能更好适应AI带来的挑战。</li>
+                        <li><strong>探索制定AI专门立法：</strong>研究制定专门的《人工智能法》或《人工智能责任法》，系统规定AI的基本伦理原则、风险管理要求、各主体责任、监管机制和法律责任。</li>
+                        <li><strong>明确责任认定规则：</strong>针对AI特性，细化过错认定标准、因果关系证明规则、举证责任分配（如考虑在高风险场景下的举证责任倒置或减轻）。</li>
+                        <li><strong>建立损害赔偿与救济机制：</strong>探索设立AI损害赔偿基金、强制责任保险制度等，确保受害者能够获得及时有效的救济。</li>
+                        <li><strong>加强监管执法与司法实践：</strong>提升监管机构的执法能力和司法机关的专业审判能力，积累AI相关案件的裁判经验。</li>
+                        <li><strong>推动国际法律协调：</strong>积极参与AI法律与伦理的国际对话和规则制定，推动形成国际共识和协调机制。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                 <a href="case_studies.html" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors text-lg shadow-md">
+                    查看相关案例研究 →
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <h3 class="text-lg font-semibold mb-4">AI责任框架研究</h3>
+                    <p class="text-gray-400 mb-4">
+                        致力于构建清晰、公正、可执行的人工智能系统决策责任归属与追责框架。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        © 2024 AI责任框架研究项目. 保留所有权利.
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">快速导航</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white">首页</a></li>
+                        <li><a href="background.html" class="hover:text-white">研究背景</a></li>
+                        <li><a href="analysis.html" class="hover:text-white">问题分析</a></li>
+                        <li><a href="solution_framework.html" class="hover:text-white">解决方案框架</a></li>
+                        <li><a href="case_studies.html" class="hover:text-white">案例研究</a></li>
+                        <li><a href="guidelines_policymakers.html" class="hover:text-white">指南: 政策制定者</a></li>
+                        <li><a href="guidelines_developers.html" class="hover:text-white">指南: 开发者/企业</a></li>
+                        <li><a href="guidelines_research.html" class="hover:text-white">指南: 研究机构</a></li>
+                        <li><a href="guidelines_public.html" class="hover:text-white">指南: 公众用户</a></li>
+                        <li><a href="interactive_resources.html" class="hover:text-white">互动与资源</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="team.html" class="hover:text-white">研究团队</a></li>
+                        <li><a href="contact.html" class="hover:text-white">联系方式</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('#framework-tabs .tab-button');
+            const tabContents = document.querySelectorAll('#tab-content-container > div');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Deactivate all tabs and hide all content
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.add('hidden'));
+
+                    // Activate clicked tab and show its content
+                    tab.classList.add('active');
+                    const targetContentId = tab.getAttribute('data-tab') + '-content';
+                    document.getElementById(targetContentId).classList.remove('hidden');
+                });
+            });
+        });
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

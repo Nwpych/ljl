@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互动与资源 - AI责任框架研究</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .tab-button.active {
+            @apply border-blue-600 text-blue-600 bg-white font-semibold;
+        }
+        .tab-button {
+            @apply border-b-2 border-transparent px-6 py-3 text-gray-500 hover:text-gray-700 hover:border-gray-300 transition-colors duration-150 ease-in-out focus:outline-none bg-gray-100 hover:bg-gray-200;
+        }
+        .faq-item-trigger {
+            @apply flex justify-between items-center w-full text-left py-4 px-6 bg-gray-50 hover:bg-gray-100 rounded-lg shadow cursor-pointer transition-colors;
+        }
+        .faq-item-content {
+            @apply px-6 pb-4 pt-2 text-gray-600 text-sm bg-white rounded-b-lg shadow;
+        }
+        .scenario-card {
+            @apply bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300;
+        }
+        .scenario-choice-button {
+            @apply px-4 py-2 border rounded-lg transition-all duration-150 ease-in-out;
+        }
+        .scenario-choice-button:hover {
+            @apply opacity-80;
+        }
+         .scenario-choice-button.active { /* Custom active style for scenario buttons */
+            /* Example: You might want a ring or a stronger border */
+            /* ring-2 ring-offset-1 ring-blue-500 (applied via JS) */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="../index.html" class="text-xl font-bold text-gray-900">AI责任框架研究</a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="../index.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">首页</a>
+                    <a href="background.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">研究背景</a>
+                    <a href="analysis.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">问题分析</a>
+                    <a href="solution_framework.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">解决方案框架</a>
+                    <a href="case_studies.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">案例研究</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors inline-flex items-center">
+                            行动指南
+                            <svg class="w-4 h-4 ml-1 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-md py-1 w-48 z-10">
+                            <a href="guidelines_policymakers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">政策制定者</a>
+                            <a href="guidelines_developers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">开发者/企业</a>
+                            <a href="guidelines_research.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">研究机构</a>
+                            <a href="guidelines_public.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">公众用户</a>
+                        </div>
+                    </div>
+                    <a href="interactive_resources.html" class="text-blue-600 font-semibold px-3 py-2 rounded-md text-sm">互动与资源</a>
+                    <a href="team.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">研究团队</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">联系我们</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <a href="../index.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">首页</a>
+                <a href="background.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">研究背景</a>
+                <a href="analysis.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">问题分析</a>
+                <a href="solution_framework.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">解决方案框架</a>
+                <a href="case_studies.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">案例研究</a>
+                <a href="guidelines_policymakers.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 政策制定者</a>
+                <a href="guidelines_developers.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 开发者/企业</a>
+                <a href="guidelines_research.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 研究机构</a>
+                <a href="guidelines_public.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 公众用户</a>
+                <a href="interactive_resources.html" class="text-blue-600 font-semibold block px-3 py-2 rounded-md text-base">互动与资源</a>
+                <a href="team.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">研究团队</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-teal-500 to-cyan-600 text-white py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">互动与资源</h1>
+            <p class="text-xl opacity-90">
+                探索AI伦理的常见问题、模拟伦理场景，并查阅相关术语。
+            </p>
+        </div>
+    </section>
+
+    <main class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Tabs -->
+        <div class="mb-8 border-b border-gray-200">
+            <nav class="flex -mb-px space-x-1" aria-label="Tabs">
+                <button class="tab-button" data-tab-target="#faq-content" aria-current="page">
+                    <i class="fas fa-question-circle mr-2"></i>常见问题 (FAQ)
+                </button>
+                <button class="tab-button" data-tab-target="#scenarios-content">
+                    <i class="fas fa-project-diagram mr-2"></i>伦理场景模拟
+                </button>
+                <button class="tab-button" data-tab-target="#glossary-content">
+                    <i class="fas fa-book mr-2"></i>术语表
+                </button>
+                 <button class="tab-button" data-tab-target="#downloads-content">
+                    <i class="fas fa-download mr-2"></i>资料下载
+                </button>
+            </nav>
+        </div>
+
+        <!-- Tab Content -->
+        <div>
+            <div id="faq-content" data-tab-content class="hidden">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8">常见问题 (FAQ)</h2>
+                <div class="space-y-4">
+                    <div class="faq-item">
+                        <button class="faq-item-trigger">
+                            <span class="font-semibold text-gray-700">什么是AI责任框架？</span>
+                            <svg class="w-5 h-5 text-gray-500 faq-icon transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        </button>
+                        <div class="faq-item-content hidden">
+                            AI责任框架是一套原则、指南、流程和机制，旨在明确人工智能系统在设计、开发、部署和使用过程中，各参与方（如开发者、部署者、用户、监管机构等）的责任，并在AI系统造成损害或做出不当决策时，能够有效地进行追溯和问责。
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-item-trigger">
+                            <span class="font-semibold text-gray-700">为什么AI责任问题如此重要？</span>
+                            <svg class="w-5 h-5 text-gray-500 faq-icon transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        </button>
+                        <div class="faq-item-content hidden">
+                            随着AI在关键领域的广泛应用，其决策可能产生重大社会影响。明确AI责任对于保障公民权益、维护社会公平正义、增强公众信任、促进技术健康发展至关重要。缺乏清晰的责任框架可能导致“责任真空”，使得损害发生时难以追责。
+                        </div>
+                    </div>
+                     <div class="faq-item">
+                        <button class="faq-item-trigger">
+                            <span class="font-semibold text-gray-700">AI的“黑箱”问题如何影响责任认定？</span>
+                            <svg class="w-5 h-5 text-gray-500 faq-icon transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        </button>
+                        <div class="faq-item-content hidden">
+                           AI特别是深度学习模型的决策过程往往不透明，难以完全理解其内部逻辑，这被称为“黑箱”问题。当AI系统做出错误决策时，黑箱特性使得追溯错误原因、判断是算法缺陷、数据问题还是其他因素变得困难，从而增加了责任认定的复杂性。
+                        </div>
+                    </div>
+                     <div class="faq-item">
+                        <button class="faq-item-trigger">
+                            <span class="font-semibold text-gray-700">什么是算法偏见？它如何产生？</span>
+                            <svg class="w-5 h-5 text-gray-500 faq-icon transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        </button>
+                        <div class="faq-item-content hidden">
+                           算法偏见指的是AI系统做出的决策系统性地对特定群体或个体不利。它可能源于训练数据中存在的历史偏见（如性别、种族歧视）、数据采样不均衡、特征选择不当，或算法模型自身的设计缺陷。这些偏见可能导致不公平的社会后果。
+                        </div>
+                    </div>
+                    <!-- Add more FAQ items as needed -->
+                </div>
+            </div>
+
+            <div id="scenarios-content" data-tab-content class="hidden">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8">伦理场景模拟</h2>
+                <p class="text-gray-700 mb-6">通过以下模拟场景，思考AI伦理决策中的复杂性和挑战。这些场景旨在引发讨论，而非提供唯一正确答案。</p>
+                
+                <div class="grid md:grid-cols-1 gap-8">
+                    <!-- Scenario Card Example (based on js/scenario-simulation.js logic) -->
+                    <div class="scenario-card" id="scenario-av">
+                        <div class="p-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+                            <h3 class="text-2xl font-bold">场景：自动驾驶汽车的“电车难题”</h3>
+                            <p class="text-sm opacity-90">一辆L4级自动驾驶汽车在行驶中，突然遭遇不可避免的事故：前方道路因突发山体滑坡被完全阻断，车辆已无法及时刹停。系统面临选择：</p>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
+                                <button data-scenario="av" data-choice="swerve-left" data-theme-color="red" class="scenario-choice-button w-full bg-red-100 text-red-700 hover:bg-red-200 border-red-300">
+                                    选择A: 紧急左转，撞向路边护栏，可能导致车内乘客重伤或死亡，但避免撞击前方障碍物。
+                                </button>
+                                <button data-scenario="av" data-choice="swerve-right" data-theme-color="yellow" class="scenario-choice-button w-full bg-yellow-100 text-yellow-700 hover:bg-yellow-200 border-yellow-300">
+                                    选择B: 紧急右转，冲下旁边有行人的便道，可能导致行人伤亡，但车内乘客相对安全。
+                                </button>
+                                 <button data-scenario="av" data-choice="straight" data-theme-color="green" class="scenario-choice-button w-full bg-green-100 text-green-700 hover:bg-green-200 border-green-300">
+                                    选择C: 继续直行，撞向滑坡障碍物，车内乘客和车辆本身都将面临巨大风险。
+                                </button>
+                            </div>
+
+                            <div id="scenario-av-results-placeholder" class="mt-6 p-4 bg-gray-100 rounded-md text-center text-gray-500 italic">
+                                请选择一个行动方案来查看可能的伦理考量和责任分析。
+                            </div>
+
+                            <div id="scenario-av-result-swerve-left" class="hidden mt-6 p-4 border border-red-300 bg-red-50 rounded-md">
+                                <h4 class="font-semibold text-red-700">选择A的分析：</h4>
+                                <p class="text-sm text-red-600"><strong>伦理考量：</strong>此选择可能遵循“最小化整体伤害”（如果护栏外无人）或“保护弱者”（如果行人被视为更弱势）。但牺牲乘客的伦理预设可能不被所有用户接受。<strong>责任分析：</strong>如果造成乘客伤亡，责任可能指向AI系统开发者（伦理算法预设）、汽车制造商（安全设计）。乘客或其家属可能提起诉讼。若汽车制造商在用户手册中明确告知了此类伦理预设，并获得用户某种形式的同意，情况会更复杂。</p>
+                            </div>
+                            <div id="scenario-av-result-swerve-right" class="hidden mt-6 p-4 border border-yellow-300 bg-yellow-50 rounded-md">
+                                <h4 class="font-semibold text-yellow-700">选择B的分析：</h4>
+                                <p class="text-sm text-yellow-600"><strong>伦理考量：</strong>此选择优先保护车内乘客，但以牺牲无辜路人为代价，可能违背“不伤害原则”或“功利主义”（若行人伤亡大于乘客）。<strong>责任分析：</strong>若造成行人伤亡，AI系统开发者、汽车制造商可能因系统决策导致第三方伤害而承担主要责任。行人及其家属有明确的索赔对象。安全标准和法规对此类场景的指导至关重要。</p>
+                            </div>
+                             <div id="scenario-av-result-straight" class="hidden mt-6 p-4 border border-green-300 bg-green-50 rounded-md">
+                                <h4 class="font-semibold text-green-700">选择C的分析：</h4>
+                                <p class="text-sm text-green-600"><strong>伦理考量：</strong>此选择看似“不作为”，但实际也是一种决策。可能基于“不主动伤害第三方”的原则，或系统无法在极短时间内做出更优判断。<strong>责任分析：</strong>乘客伤亡责任可能主要由开发者/制造商承担，因系统未能有效避险。若滑坡是不可预见的自然灾害，可能涉及不可抗力因素，但系统在面对突发情况的应对能力仍是焦点。</p>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-4">免责声明：以上分析仅为简化示例，实际责任认定非常复杂，需结合具体法律、技术细节和调查结果。</p>
+                        </div>
+                    </div>
+                    <!-- Add more scenario cards here -->
+                </div>
+                 <p class="mt-8 text-sm text-gray-600 text-center">更多互动场景和深度案例分析，请参见<a href="case_studies.html" class="text-blue-600 hover:underline">案例研究页面</a>。</p>
+            </div>
+
+            <div id="glossary-content" data-tab-content class="hidden">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8">术语表</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700">人工智能 (AI)</h3>
+                        <p class="text-gray-600">指机器模拟人类智能行为的能力，包括学习、推理、问题解决、感知、语言理解等。</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700">算法偏见 (Algorithmic Bias)</h3>
+                        <p class="text-gray-600">指AI系统由于有缺陷的数据或设计，做出的决策系统性地对特定群体或个体不利。</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700">黑箱 (Black Box)</h3>
+                        <p class="text-gray-600">常用于描述某些AI（特别是深度学习模型）的内部工作机制不透明，难以被人类理解或解释。</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700">可解释AI (Explainable AI, XAI)</h3>
+                        <p class="text-gray-600">旨在开发能够让其决策过程被人类理解的AI技术和方法。</p>
+                    </div>
+                     <div>
+                        <h3 class="text-xl font-semibold text-gray-700">责任框架 (Accountability Framework)</h3>
+                        <p class="text-gray-600">一套原则、规则、流程和机制，用于明确AI生命周期中各方责任，并确保在出现问题时能够有效追责。</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700">利益相关者 (Stakeholders)</h3>
+                        <p class="text-gray-600">受AI系统影响或对其有影响的个人、群体或组织，包括开发者、用户、监管机构、公众等。</p>
+                    </div>
+                    <!-- Add more glossary terms as needed -->
+                </div>
+            </div>
+            
+            <div id="downloads-content" data-tab-content class="hidden">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8">资料下载</h2>
+                <p class="text-gray-700 mb-6">此处汇总了本站提供的各类行动指南和研究报告的下载链接，方便您查阅和分享。</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-blue-50 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-2">指南: 政策制定者</h3>
+                        <p class="text-sm text-blue-700 mb-3">为政策制定者提供构建有效AI责任治理框架的建议。</p>
+                        <a href="../docs/guidelines_policymakers.pdf" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-file-pdf mr-2"></i> 下载PDF
+                        </a>
+                    </div>
+                    <div class="p-6 bg-indigo-50 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold text-indigo-800 mb-2">指南: 开发者与企业</h3>
+                        <p class="text-sm text-indigo-700 mb-3">为AI开发者和企业提供构建负责任AI系统的实践建议。</p>
+                        <a href="../docs/guidelines_developers.pdf" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-file-pdf mr-2"></i> 下载PDF
+                        </a>
+                    </div>
+                    <div class="p-6 bg-green-50 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold text-green-800 mb-2">指南: 研究机构</h3>
+                        <p class="text-sm text-green-700 mb-3">为学术界和研究机构提供推动AI责任研究和教育的建议。</p>
+                        <a href="../docs/guidelines_research.pdf" class="inline-flex items-center text-green-600 hover:text-green-800 font-semibold" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-file-pdf mr-2"></i> 下载PDF
+                        </a>
+                    </div>
+                    <div class="p-6 bg-purple-50 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold text-purple-800 mb-2">指南: 公众用户</h3>
+                        <p class="text-sm text-purple-700 mb-3">帮助公众用户理解AI责任问题，维护自身权益。</p>
+                        <a href="../docs/guidelines_public.pdf" class="inline-flex items-center text-purple-600 hover:text-purple-800 font-semibold" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-file-pdf mr-2"></i> 下载PDF
+                        </a>
+                    </div>
+                     <div class="p-6 bg-gray-100 rounded-lg shadow md:col-span-2">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">综合研究报告 (占位)</h3>
+                        <p class="text-sm text-gray-700 mb-3">关于AI责任框架的完整研究报告，包含详细分析、案例研究和政策建议。</p>
+                        <a href="#" class="inline-flex items-center text-gray-500 hover:text-gray-700 font-semibold cursor-not-allowed" aria-disabled="true">
+                            <i class="fas fa-file-pdf mr-2"></i> 即将推出
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <h3 class="text-lg font-semibold mb-4">AI责任框架研究</h3>
+                    <p class="text-gray-400 mb-4">
+                        致力于构建清晰、公正、可执行的人工智能系统决策责任归属与追责框架。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        © 2024 AI责任框架研究项目. 保留所有权利。
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">快速导航</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white">首页</a></li>
+                        <li><a href="background.html" class="hover:text-white">研究背景</a></li>
+                        <li><a href="analysis.html" class="hover:text-white">问题分析</a></li>
+                        <li><a href="solution_framework.html" class="hover:text-white">解决方案框架</a></li>
+                        <li><a href="case_studies.html" class="hover:text-white">案例研究</a></li>
+                        <li><a href="guidelines_policymakers.html" class="hover:text-white">指南: 政策制定者</a></li>
+                        <li><a href="guidelines_developers.html" class="hover:text-white">指南: 开发者/企业</a></li>
+                        <li><a href="guidelines_research.html" class="hover:text-white">指南: 研究机构</a></li>
+                        <li><a href="guidelines_public.html" class="hover:text-white">指南: 公众用户</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="team.html" class="hover:text-white">研究团队</a></li>
+                        <li><a href="contact.html" class="hover:text-white">联系方式</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/scenario-simulation.js"></script> 
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究团队 - AI责任框架研究</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .team-member-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .team-member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="../index.html" class="text-xl font-bold text-gray-900">AI责任框架研究</a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="../index.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">首页</a>
+                    <a href="background.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">研究背景</a>
+                    <a href="analysis.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">问题分析</a>
+                    <a href="solution_framework.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">解决方案框架</a>
+                    <a href="case_studies.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">案例研究</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors inline-flex items-center">
+                            行动指南
+                            <svg class="w-4 h-4 ml-1 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-md py-1 w-48 z-10">
+                            <a href="guidelines_policymakers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">政策制定者</a>
+                            <a href="guidelines_developers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">开发者/企业</a>
+                            <a href="guidelines_research.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">研究机构</a>
+                            <a href="guidelines_public.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">公众用户</a>
+                        </div>
+                    </div>
+                    <a href="interactive_resources.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">互动与资源</a>
+                    <a href="team.html" class="text-blue-600 font-semibold px-3 py-2 rounded-md text-sm">研究团队</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">联系我们</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <a href="../index.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">首页</a>
+                <a href="background.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">研究背景</a>
+                <a href="analysis.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">问题分析</a>
+                <a href="solution_framework.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">解决方案框架</a>
+                <a href="case_studies.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">案例研究</a>
+                <a href="guidelines_policymakers.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 政策制定者</a>
+                <a href="guidelines_developers.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 开发者/企业</a>
+                <a href="guidelines_research.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 研究机构</a>
+                <a href="guidelines_public.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 公众用户</a>
+                <a href="interactive_resources.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">互动与资源</a>
+                <a href="team.html" class="text-blue-600 font-semibold block px-3 py-2 rounded-md text-base">研究团队</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-teal-500 to-cyan-600 text-white py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">我们的团队</h1>
+            <p class="text-xl opacity-90">
+                认识致力于推动AI责任框架研究的专家和学者们。
+            </p>
+        </div>
+    </section>
+
+    <main class="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow-xl rounded-xl p-8 md:p-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">AI伦理研究小组</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    AI伦理研究小组是一个跨学科的专家团队，致力于深入研究人工智能伦理、治理和政策问题。我们的使命是通过严谨的研究、开放的讨论和实际的解决方案，推动构建一个负责任、可信赖和以人为本的AI未来。团队成员来自计算机科学、法学、哲学、社会学等多个领域，共同为AI责任框架的构建贡献智慧。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Team Member 1 (Lead Placeholder) -->
+                <div class="team-member-card bg-gray-50 p-6 rounded-lg text-center">
+                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-md" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZmVzc2lvbmFsJTIwcG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=200&q=60" alt="Dr. Evelyn Hayes">
+                    <h3 class="text-xl font-semibold text-gray-800">伊芙琳·海耶斯 博士</h3>
+                    <p class="text-indigo-600 font-medium">项目首席研究员</p>
+                    <p class="text-sm text-gray-600 mt-2">海耶斯博士是人工智能伦理与治理领域的资深专家，在AI政策、法律框架和社会影响方面拥有超过15年的研究经验。她致力于推动负责任AI的理论研究与实践应用。</p>
+                    <p class="text-xs text-gray-500 mt-3">专业领域：AI伦理、AI法律、公共政策</p>
+                </div>
+
+                <!-- Team Member 2 (Tech Lead Placeholder) -->
+                <div class="team-member-card bg-gray-50 p-6 rounded-lg text-center">
+                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-md" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHByb2Zlc3Npb25hbCUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60" alt="Mr. Kenji Tanaka">
+                    <h3 class="text-xl font-semibold text-gray-800">田中健二 先生</h3>
+                    <p class="text-indigo-600 font-medium">技术研究负责人</p>
+                    <p class="text-sm text-gray-600 mt-2">田中先生是机器学习和数据科学领域的专家，专注于可解释AI（XAI）、算法公平性和AI系统安全。他领导团队进行技术攻关，为责任框架提供技术支撑。</p>
+                     <p class="text-xs text-gray-500 mt-3">专业领域：机器学习、可解释AI、数据科学</p>
+                </div>
+                
+                <!-- Team Member 3 (Legal Expert Placeholder) -->
+                <div class="team-member-card bg-gray-50 p-6 rounded-lg text-center">
+                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-md" src="https://images.unsplash.com/photo-1542740348-3950c0e7484A?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHByb2Zlc3Npb25hbCUyMHdvbWFuJTIwcG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=200&q=60" alt="Ms. Aisha Khan">
+                    <h3 class="text-xl font-semibold text-gray-800">艾莎·汗 女士</h3>
+                    <p class="text-indigo-600 font-medium">法律与政策分析师</p>
+                    <p class="text-sm text-gray-600 mt-2">汗女士是一名经验丰富的律师，专注于科技法和数据隐私。她在AI相关的法律法规、合规性以及国际治理方面有深入研究，为项目提供法律视角。</p>
+                     <p class="text-xs text-gray-500 mt-3">专业领域：科技法、数据隐私、AI合规</p>
+                </div>
+
+                <!-- Team Member 4 (Sociologist Placeholder) -->
+                <div class="team-member-card bg-gray-50 p-6 rounded-lg text-center">
+                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-md" src="https://images.unsplash.com/photo-1530268729831-4b0b9e170218?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fHByb2Zlc3Npb25hbCUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60" alt="Dr. David Lee">
+                    <h3 class="text-xl font-semibold text-gray-800">李大卫 博士</h3>
+                    <p class="text-indigo-600 font-medium">社会影响研究员</p>
+                    <p class="text-sm text-gray-600 mt-2">李博士是一位社会学家，专注于科技对社会结构和个体行为的影响。他负责评估AI技术应用的社会后果，确保框架能够应对潜在的社会挑战。</p>
+                    <p class="text-xs text-gray-500 mt-3">专业领域：科技社会学、社会影响评估、伦理研究</p>
+                </div>
+
+                <!-- Team Member 5 (Philosopher Placeholder) -->
+                <div class="team-member-card bg-gray-50 p-6 rounded-lg text-center">
+                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-md" src="https://images.unsplash.com/photo-1598257006407-7c828ce798cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzV8fHByb2Zlc3Npb25hbCUyMHdvbWFuJTIwcG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=200&q=60" alt="Professor Sofia Petrova">
+                    <h3 class="text-xl font-semibold text-gray-800">索菲亚·佩特洛娃 教授</h3>
+                    <p class="text-indigo-600 font-medium">伦理学顾问</p>
+                    <p class="text-sm text-gray-600 mt-2">佩特洛娃教授是著名的伦理学哲学家，专注于应用伦理学和科技伦理。她为项目提供深厚的伦理理论指导，确保框架的道德稳健性。</p>
+                    <p class="text-xs text-gray-500 mt-3">专业领域：应用伦理学、科技哲学、道德理论</p>
+                </div>
+                
+                <!-- Team Member 6 (Coordinator Placeholder) -->
+                <div class="team-member-card bg-gray-50 p-6 rounded-lg text-center">
+                    <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover shadow-md" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fHByb2Zlc3Npb25hbCUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60" alt="Mr. Carlos Gomez">
+                    <h3 class="text-xl font-semibold text-gray-800">卡洛斯·戈麦斯 先生</h3>
+                    <p class="text-indigo-600 font-medium">项目协调员</p>
+                    <p class="text-sm text-gray-600 mt-2">戈麦斯先生负责项目的日常运营、沟通协调和成果传播。他确保研究活动的顺利进行，并促进团队与外部利益相关者的有效互动。</p>
+                    <p class="text-xs text-gray-500 mt-3">专业领域：项目管理、科学传播、利益相关者协调</p>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <p class="text-gray-700">我们相信，通过跨学科的紧密合作和对AI伦理挑战的持续探索，能够为构建一个更加公正、透明和负责任的AI未来贡献力量。</p>
+                <a href="contact.html" class="mt-6 inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+                    联系我们 & 参与讨论
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <h3 class="text-lg font-semibold mb-4">AI责任框架研究</h3>
+                    <p class="text-gray-400 mb-4">
+                        致力于构建清晰、公正、可执行的人工智能系统决策责任归属与追责框架。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        © 2024 AI责任框架研究项目. 保留所有权利.
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">快速导航</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white">首页</a></li>
+                        <li><a href="background.html" class="hover:text-white">研究背景</a></li>
+                        <li><a href="analysis.html" class="hover:text-white">问题分析</a></li>
+                        <li><a href="solution_framework.html" class="hover:text-white">解决方案框架</a></li>
+                         <li><a href="case_studies.html" class="hover:text-white">案例研究</a></li>
+                        <li><a href="guidelines_policymakers.html" class="hover:text-white">指南: 政策制定者</a></li>
+                        <li><a href="guidelines_developers.html" class="hover:text-white">指南: 开发者/企业</a></li>
+                        <li><a href="guidelines_research.html" class="hover:text-white">指南: 研究机构</a></li>
+                        <li><a href="guidelines_public.html" class="hover:text-white">指南: 公众用户</a></li>
+                        <li><a href="interactive_resources.html" class="hover:text-white">互动与资源</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="team.html" class="hover:text-white">研究团队</a></li>
+                        <li><a href="contact.html" class="hover:text-white">联系方式</a></li>
+                         <li><a href="#" class="hover:text-white">学术合作</a></li>
+                        <li><a href="#" class="hover:text-white">政策建议</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

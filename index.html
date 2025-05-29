@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人工智能系统决策责任归属与追责框架</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .section-divider {
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            height: 1px;
+        }
+        .diagram-container {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+        .diagram-container img, .diagram-container svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                         <a href="index.html" class="text-xl font-bold text-gray-900">AI责任框架研究</a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="index.html" class="text-blue-600 font-semibold px-3 py-2 rounded-md text-sm">首页</a>
+                    <a href="pages/background.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">研究背景</a>
+                    <a href="pages/analysis.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">问题分析</a>
+                    <a href="pages/solution_framework.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">解决方案框架</a>
+                    <a href="pages/case_studies.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">案例研究</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors inline-flex items-center">
+                            行动指南
+                            <svg class="w-4 h-4 ml-1 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-md py-1 w-48 z-10">
+                            <a href="pages/guidelines_policymakers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">政策制定者</a>
+                            <a href="pages/guidelines_developers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">开发者/企业</a>
+                            <a href="pages/guidelines_research.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">研究机构</a>
+                            <a href="pages/guidelines_public.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">公众用户</a>
+                        </div>
+                    </div>
+                    <a href="pages/interactive_resources.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">互动与资源</a>
+                    <a href="pages/team.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">研究团队</a>
+                    <a href="pages/contact.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">联系我们</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <a href="index.html" class="text-blue-600 font-semibold block px-3 py-2 rounded-md text-base">首页</a>
+                <a href="pages/background.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">研究背景</a>
+                <a href="pages/analysis.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">问题分析</a>
+                <a href="pages/solution_framework.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">解决方案框架</a>
+                <a href="pages/case_studies.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">案例研究</a>
+                <a href="pages/guidelines_policymakers.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 政策制定者</a>
+                <a href="pages/guidelines_developers.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 开发者/企业</a>
+                <a href="pages/guidelines_research.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 研究机构</a>
+                <a href="pages/guidelines_public.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">指南: 公众用户</a>
+                <a href="pages/interactive_resources.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">互动与资源</a>
+                <a href="pages/team.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">研究团队</a>
+                <a href="pages/contact.html" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    人工智能系统决策的
+                    <span class="block">责任归属与追责框架构建</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
+                    构建清晰、公正、可执行的AI责任归属框架，推动负责任的人工智能创新与治理
+                </p>
+                <div class="space-x-4">
+                    <a href="pages/solution_framework.html" class="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        查看解决方案
+                    </a>
+                    <a href="pages/background.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors">
+                        了解背景
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">核心问题挑战</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    随着AI技术的飞速发展，其在关键领域的自主决策能力日益增强，但传统的责任归属与追责机制面临前所未有的挑战
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">算法"黑箱"</h3>
+                    <p class="text-gray-600">复杂AI系统的决策过程不透明，难以追溯和理解</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">数据偏见</h3>
+                    <p class="text-gray-600">训练数据中的历史偏见可能导致不公平的决策结果</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">多主体复杂性</h3>
+                    <p class="text-gray-600">开发、部署、运营链条复杂，责任界定困难</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16l3-1m-3 1l-3-1"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">法律滞后</h3>
+                    <p class="text-gray-600">现有法律体系难以适应AI技术的特殊性</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Solution Overview -->
+    <section class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">综合解决方案框架 (概述)</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    构建多层次、跨领域协同的治理体系，系统性解决AI系统决策的责任归属与追责难题
+                </p>
+            </div>
+
+            <div class="diagram-container">
+                <h3 class="text-xl font-semibold mb-4 text-center text-gray-800">图表 1.1: AI 工程伦理项目概览流程图</h3>
+                <img src="https://r2.flowith.net/files/o/1748502352113-AIEngineeringEthicsProjectOverviewFlowchart_index_2@1024x1024.png" alt="AI Engineering Ethics Project Overview Flowchart">
+                <p class="text-xs text-center text-gray-500 mt-4">此流程图展示了项目研究的整体结构和主要环节。</p>
+            </div>
+
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">核心伦理原则体系</h3>
+                    <p class="text-gray-600 mb-4">建立以人为本、公平公正、可控可信、透明问责等核心原则</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 以人为本</li>
+                        <li>• 公平公正与非歧视</li>
+                        <li>• 可控可信</li>
+                        <li>• 透明度与可解释性</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">风险分级管理</h3>
+                    <p class="text-gray-600 mb-4">依据AI应用风险等级设定差异化合规要求和行为准则</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 不可接受风险</li>
+                        <li>• 高风险应用</li>
+                        <li>• 有限风险</li>
+                        <li>• 低风险/最小风险</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">责任矩阵体系</h3>
+                    <p class="text-gray-600 mb-4">明确AI生命周期中各参与方的权利、义务与责任</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 开发者责任</li>
+                        <li>• 运营者责任</li>
+                        <li>• 用户责任</li>
+                        <li>• 监管者责任</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">全周期风险治理</h3>
+                    <p class="text-gray-600 mb-4">建立涵盖设计、开发、部署、运行全生命周期的风险管控</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 事前预防</li>
+                        <li>• 事中监测</li>
+                        <li>• 事后补救</li>
+                        <li>• 持续改进</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066 2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">技术支撑体系</h3>
+                    <p class="text-gray-600 mb-4">构建可解释AI、隐私增强、审计追踪等关键技术基础</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 可解释AI (XAI)</li>
+                        <li>• 隐私增强技术</li>
+                        <li>• 区块链审计</li>
+                        <li>• 偏见检测工具</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">法律政策衔接</h3>
+                    <p class="text-gray-600 mb-4">推动AI责任相关立法和政策制定，完善法律保障</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• AI专门立法</li>
+                        <li>• 责任认定规则</li>
+                        <li>• 强制保险制度</li>
+                        <li>• 国际协调合作</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="pages/solution_framework.html" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    深入了解解决方案框架 →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">框架核心特点</h2>
+                <p class="text-lg text-gray-600">基于深入研究和实践验证的综合性解决方案</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                                    <span class="text-white font-bold">1</span>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-semibold mb-2">系统性解决方案</h3>
+                                <p class="text-gray-600">涵盖技术、法律、伦理、治理等多个维度的综合框架</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
+                                    <span class="text-white font-bold">2</span>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-semibold mb-2">分级风险管理</h3>
+                                <p class="text-gray-600">根据AI应用风险等级采用差异化的监管策略</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
+                                    <span class="text-white font-bold">3</span>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-semibold mb-2">多方协同治理</h3>
+                                <p class="text-gray-600">政府、企业、学界、社会组织共同参与的治理模式</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                                    <span class="text-white font-bold">4</span>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-semibold mb-2">前瞻性设计</h3>
+                                <p class="text-gray-600">考虑AI技术发展趋势，具备良好的适应性和扩展性</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-2xl">
+                    <div class="text-center">
+                        <div class="w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">负责任AI的未来</h3>
+                        <p class="text-gray-600 mb-6">
+                            通过构建完善的责任归属和追责机制，推动AI技术的健康发展，确保AI服务于人类福祉
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-white p-4 rounded-lg">
+                                <div class="text-2xl font-bold text-blue-600 mb-1">8+</div>
+                                <div class="text-gray-600">核心原则</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <div class="text-2xl font-bold text-green-600 mb-1">4</div>
+                                <div class="text-gray-600">风险等级</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <div class="text-2xl font-bold text-purple-600 mb-1">10+</div>
+                                <div class="text-gray-600">利益相关者</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <div class="text-2xl font-bold text-orange-600 mb-1">3</div>
+                                <div class="text-gray-600">治理阶段</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gray-900 text-white">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                共同构建负责任的AI未来
+            </h2>
+            <p class="text-xl mb-8 opacity-90">
+                这一框架需要政府、企业、学界和社会各界的共同努力。让我们携手推动人工智能技术的负责任发展。
+            </p>
+            <div class="space-x-4">
+                <a href="pages/solution_framework.html" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors">
+                    深入了解框架
+                </a>
+                <a href="pages/contact.html" class="border-2 border-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-lg font-semibold transition-colors">
+                    参与讨论
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <h3 class="text-lg font-semibold mb-4">AI责任框架研究</h3>
+                    <p class="text-gray-400 mb-4">
+                        致力于构建清晰、公正、可执行的人工智能系统决策责任归属与追责框架，推动负责任的AI创新与治理。
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        © 2024 AI责任框架研究项目. 保留所有权利.
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">快速导航</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="pages/background.html" class="hover:text-white">研究背景</a></li>
+                        <li><a href="pages/analysis.html" class="hover:text-white">问题分析</a></li>
+                        <li><a href="pages/solution_framework.html" class="hover:text-white">解决方案框架</a></li>
+                        <li><a href="pages/case_studies.html" class="hover:text-white">案例研究</a></li>
+                        <li><a href="pages/guidelines_policymakers.html" class="hover:text-white">指南: 政策制定者</a></li>
+                        <li><a href="pages/guidelines_developers.html" class="hover:text-white">指南: 开发者/企业</a></li>
+                        <li><a href="pages/guidelines_research.html" class="hover:text-white">指南: 研究机构</a></li>
+                        <li><a href="pages/guidelines_public.html" class="hover:text-white">指南: 公众用户</a></li>
+                        <li><a href="pages/interactive_resources.html" class="hover:text-white">互动与资源</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="pages/team.html" class="hover:text-white">研究团队</a></li>
+                        <li><a href="pages/contact.html" class="hover:text-white">联系方式</a></li>
+                        <li><a href="#" class="hover:text-white">学术合作</a></li>
+                        <li><a href="#" class="hover:text-white">政策建议</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>
